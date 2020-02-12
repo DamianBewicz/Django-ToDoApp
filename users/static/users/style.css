@@ -1,0 +1,14 @@
+body
+{
+    margin: 0;
+}
+
+#login-try
+{
+    text-align: center;
+}
+
+#logout
+{
+    text-align: right;
+}
