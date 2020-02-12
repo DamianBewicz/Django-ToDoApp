@@ -3,7 +3,7 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    <a href="{% url 'activity' %}">Dodaj aktywność</a>
+    <a href="{% url 'activitie' %}">Dodaj aktywność</a>
   {% else %}
     <h2>
       <a href="{% url 'login' %}">Zaloguj się aby coś zobaczyć</a>

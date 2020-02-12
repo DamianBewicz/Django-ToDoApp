@@ -17,12 +17,12 @@
           {% else %}
             <h1 id="login-try">Witaj {{ user.username }}!</h1>
           {% endif %}
-          <nav class="nav nav-pills nav-justified bg-dark">
-            <a class="navbar-brand ml-3" href="#">
+          <nav class="nav navbar navbar-dark nav-pills nav-justified bg-dark">
+            <a class="navbar-brand ml-3" href="{% url 'home' %}">
               <img src="{% static 'icon1.png' %}" alt="Rysuneczek" width=20px height=20px>
             </a>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Strona główna</a>
+              <a class="nav-link text-white" href="{% url 'home' %}">Strona główna</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="#">Poradnik</a>
@@ -30,11 +30,9 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="#">Pomoc</a>
             </li>
-            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'activity' %}">Aktywności</a>
+              <a class="nav-link text-white" href="{% url 'activitie' %}">Aktywności</a>
             </li>
-            {% endif %}
             <button class="navbar-toggler" type="button">
               <span class="navbar-toggler-icon"></span>
             </button>
