@@ -8,3 +8,7 @@ class ActivityForm(forms.ModelForm):
             'activitie',
             'to_do_date',
         ]
+
+class RawActivityForm(forms.Form):
+    activitie   = forms.CharField(max_length=50)
+    to_do_date  = forms.DateTimeField()

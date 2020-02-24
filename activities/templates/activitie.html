@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-    <table class="table table-bordered table-hover table-dark">
+    <table class="table table-bordered table-hover table-dark table-striped">
+        <tr>
+            <th>Do zrobienia</th>
+            <th>Data</th>
+            <th>Status</th>
+        </tr>
         {% for activitie in activities %}
-            <th>{{activitie.activitie}}</th>
-            <th>{{activitie.to_do_date}}</th>
-            {% if activitie.is_done %}
-                <th>Zrobione</th>
-            {% else %}
-                <th>Nie zrobione</th>
-            {% endif %}
+            <tr>
+                <th>{{activitie.activitie}}</th>
+                <th>{{activitie.to_do_date}}</th>
+                {% if activitie.is_done %}
+                    <th>Zrobione</th>
+                {% else %}
+                    <th>Nie zrobione</th>
+                {% endif %}
+            </tr>
         {% endfor %}
     </table>
 {% endblock %}
