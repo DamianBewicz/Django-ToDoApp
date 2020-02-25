@@ -7,13 +7,21 @@
             <th>Status</th>
         </tr>
         {% for activitie in activities %}
-            <tr>
-                <th>{{activitie.activitie}}</th>
-                <th>{{activitie.to_do_date}}</th>
+            <tr onclick="window.location='{% url "activity-detail" activitie.id %}';">
+                <td>
+                        {{activitie.activitie}}
+                </td>
+                <td>
+                    {{activitie.to_do_date|date:"Y-m-d H:i"}}
+                </td>
                 {% if activitie.is_done %}
-                    <th>Zrobione</th>
+                    <td>
+                        Zrobione
+                    </td>
                 {% else %}
-                    <th>Nie zrobione</th>
+                    <td>
+                        Nie zrobione
+                    </td>
                 {% endif %}
             </tr>
         {% endfor %}
