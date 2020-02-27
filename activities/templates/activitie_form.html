@@ -1,22 +1,26 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-  <h2>Stwórz aktywność!</h2>
+  <h2 id="login_header">Stwórz aktywność!</h2>
   <div class="content-section">
     <form method="post">
       {% csrf_token %}
-      <fieldset class="form-group">
+      <div class="border">
         {% for field in form %}
           <p>
-            <div class="mb-4">
+            <div class="mb-4 ml-4">
               {% if field.name == "activitie" %}
                 <b>Aktywność</b>
                 <br>
                 {{field}}
+                <br>
+                <small>Podaj nazwę swojej aktywność</small>
               {% elif field.name == 'to_do_date' %}
                 <b>Data</b>
                 <br>
                 {{field}}
+                <br>
+                <small>Podaj datę aktywności (np. 2020-02-25 18:00)</small>
               {% elif field.name == 'is_done'%}
                 <b>Wykonano</b>
                 <br>
@@ -25,8 +29,8 @@
             </div>
           </p>
         {% endfor %}
-      </fieldset>
-      <button type="submit" class="btn btn-primary">Zatwierdź</button>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Zatwierdź</button>
     </form>
   </div>
 {% endblock %}

@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="mb-3 ml-3">
+        <a href="{% url 'activitie-add' %}">Dodaj Aktywność</a>
+    </div>
     {% for activity_date, activities in grouped_activities %}
-    <h1 class="mb-4">
-        {{ activity_date}}
-    </h1>
+    <h2 class="mb-2 ml-3">
+        {{ activity_date|date:'Y-m-d'}}
+    </h2>
     <table class="table table-bordered table-hover table-dark table-striped">
         <tr>
             <th>Do zrobienia</th>

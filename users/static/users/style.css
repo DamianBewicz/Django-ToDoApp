@@ -17,3 +17,13 @@ td
 {
     cursor: pointer;
 }
+
+#login_header
+{
+    text-align: center;
+}
+
+.navbar-nav
+{
+    display: contents;
+}
