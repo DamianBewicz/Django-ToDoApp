@@ -19,11 +19,11 @@
           {% endif %}
           {% if user.is_authenticated %}
           <p class="login_menu">
-            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'logout' %}">Wyloguj się</a>
           </p>
           {% else %}
           <p class="login_menu">
-            <a href="{% url 'login' %}">Login</a> / <a href="{% url 'signup' %}">Signup</a>
+            <a href="{% url 'login' %}">Zaloguj się</a> / <a href="{% url 'signup' %}">Signup</a>
           </p>
           {% endif %}
           <nav class="nav navbar navbar-dark nav-pills nav-justified bg-dark">
@@ -45,9 +45,6 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'activitie-add' %}">Dodaj Aktywność</a>
             </li>
-            <button class="navbar-toggler" type="button">
-              <span class="navbar-toggler-icon"></span>
-            </button>
           </nav>
           <hr>
         </header>

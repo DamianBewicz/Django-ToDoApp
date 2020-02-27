@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% for activity_date, activities in activities_dict.items %}
+    <h1 class="mb-4">
+        {{ activity_date}}
+    </h1>
     <table class="table table-bordered table-hover table-dark table-striped">
         <tr>
             <th>Do zrobienia</th>
-            <th>Data</th>
+            <th>Godzina</th>
             <th>Status</th>
-        </tr>
-        {% for activitie in activities %}
-            <tr onclick="window.location='{% url "activity-detail" activitie.id %}';">
+        {% for activity in activities %}
+            <tr>
                 <td>
-                        {{activitie.activitie}}
+                    {{activity.activitie}}
                 </td>
                 <td>
-                    {{activitie.to_do_date|date:"Y-m-d H:i"}}
+                    {{activity.to_do_date|date:'H:m'}}
                 </td>
-                {% if activitie.is_done %}
+                {%if activity.is_done%}
                     <td>
                         Zrobione
                     </td>
@@ -26,4 +29,6 @@
             </tr>
         {% endfor %}
     </table>
+    <hr>
+    {% endfor %}
 {% endblock %}

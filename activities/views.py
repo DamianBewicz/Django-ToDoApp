@@ -17,11 +17,25 @@ class ActivityListView(LoginRequiredMixin, ListView):
     model = Activitie
     template_name = 'activitie.html'
     context_object_name = 'activities'
-    ordering = ['to_do_date']
+    ordering = ['-to_do_date']
 
     def get_queryset(self):
-        query_set=super().get_queryset()
-        return query_set.filter(user=self.request.user)
+        return super().get_queryset().filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        date_list = []
+        for activitie in data['activities']:
+            date_list.append(activitie.to_do_date.strftime("%d-%m-%Y"))
+        date_activities_dict = {}
+        for date in set(date_list):
+            date_activities_dict[date] = []
+        for key, item in date_activities_dict.items():
+            for activitie in data['activities']:
+                if key == activitie.to_do_date.strftime("%d-%m-%Y"):
+                    date_activities_dict[key].append(activitie)
+        data['activities_dict'] = date_activities_dict
+        return data
 
 
 class ActivityDetailView(DetailView):

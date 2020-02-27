@@ -12,3 +12,8 @@ body
 {
     text-align: right;
 }
+
+td
+{
+    cursor: pointer;
+}

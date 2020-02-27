@@ -8,9 +8,6 @@ class Activitie(models.Model):
     is_done = models.BooleanField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.title
-
     def get_absolute_url(self):
         return reverse('activity-detail', kwargs={'pk': self.pk})
 
