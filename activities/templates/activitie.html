@@ -10,7 +10,7 @@
             <th>Godzina</th>
             <th>Status</th>
         {% for activity in activities %}
-            <tr>
+            <tr onclick="window.location='{% url "activity-detail" activity.id %}';">
                 <td>
                     {{activity.activitie}}
                 </td>
