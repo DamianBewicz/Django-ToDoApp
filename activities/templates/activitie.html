@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% for activity_date, activities in activities_list %}
+    {% for activity_date, activities in grouped_activities %}
     <h1 class="mb-4">
         {{ activity_date}}
     </h1>

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from datetime import datetime
 from django.views.generic import (
     ListView,
     DetailView,
@@ -23,24 +24,20 @@ class ActivityListView(LoginRequiredMixin, ListView):
         return super().get_queryset().filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        date_list = []
-        for activitie in data['activities']:
-            date_list.append(activitie.to_do_date.strftime("%d-%m-%Y"))
-        date_activities_dict = {}
-        for date in set(date_list):
-            date_activities_dict[date] = []
-        for key, item in date_activities_dict.items():
-            for activitie in data['activities']:
-                if key == activitie.to_do_date.strftime("%d-%m-%Y"):
-                    date_activities_dict[key].append(activitie)
-        converted_list = []
-        for key, item in date_activities_dict.items():
-            converted_list.append((key, item))
-        converted_list.sort()
-        print(converted_list)
-        data['activities_list'] = converted_list
-        return data
+        context = super().get_context_data(**kwargs)
+        grouped_activities = []
+        current_date = None
+        current_activities = []
+        for activity in context['activities']:
+            if activity.to_do_date.date() != current_date:
+                if current_date is not None:
+                    grouped_activities.append((current_date, current_activities))
+                    current_activities = []
+                current_date = activity.to_do_date.date()
+            current_activities.append(activity)
+        grouped_activities.append((current_date, current_activities))
+        context['grouped_activities'] = grouped_activities
+        return context
 
 
 class ActivityDetailView(DetailView):

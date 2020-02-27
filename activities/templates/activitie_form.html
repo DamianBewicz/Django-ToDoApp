@@ -6,7 +6,25 @@
     <form method="post">
       {% csrf_token %}
       <fieldset class="form-group">
-        {{ form|crispy }}
+        {% for field in form %}
+          <p>
+            <div class="mb-4">
+              {% if field.name == "activitie" %}
+                <b>Aktywność</b>
+                <br>
+                {{field}}
+              {% elif field.name == 'to_do_date' %}
+                <b>Data</b>
+                <br>
+                {{field}}
+              {% elif field.name == 'is_done'%}
+                <b>Wykonano</b>
+                <br>
+                {{field}}
+              {% endif %}
+            </div>
+          </p>
+        {% endfor %}
       </fieldset>
       <button type="submit" class="btn btn-primary">Zatwierdź</button>
     </form>
