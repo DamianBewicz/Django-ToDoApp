@@ -1,37 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="mb-3 ml-3">
-        <a href="{% url 'activitie-add' %}">Dodaj Aktywność</a>
-    </div>
-    {% for activity_date, activities in grouped_activities %}
-    <h2 class="mb-2 ml-3">
-        {{ activity_date|date:'Y-m-d'}}
-    </h2>
-    <table class="table table-bordered table-hover table-dark table-striped">
-        <tr>
-            <th>Do zrobienia</th>
-            <th>Godzina</th>
-            <th>Status</th>
-        {% for activity in activities %}
-            <tr onclick="window.location='{% url "activity-detail" activity.id %}';">
-                <td>
-                    {{activity.activitie}}
-                </td>
-                <td>
-                    {{activity.to_do_date|date:'H:m'}}
-                </td>
-                {%if activity.is_done%}
-                    <td>
-                        Zrobione
+    <form method="post" action="{% url "activity-delete-many" %}">
+        {% csrf_token %}
+        <div class="mb-3 ml-3">
+            <a href="{% url 'activitie-add' %}">Dodaj Aktywność</a>
+            <div class="float-right">
+                <button type="submit" style="position: right;">
+                    <i class="icon-trash"></i>
+                </button>
+            </div>
+        </div>
+        {% for activity_date, activities in grouped_activities %}
+        <h2 class="mb-2 ml-3">
+            {{ activity_date|date:'Y-m-d'}}
+        </h2>
+        <table class="table table-bordered table-hover table-dark table-striped">
+            <tr>
+                <th>Do zrobienia</th>
+                <th>Godzina</th>
+                <th>Status</th>
+                <th>Usuń</th>
+            {% for activity in activities %}
+                <tr>
+                    <td  onclick="window.location='{% url "activity-detail" activity.id %}';">
+                        {{activity.activitie}}
                     </td>
-                {% else %}
-                    <td>
-                        Nie zrobione
+                    <td  onclick="window.location='{% url "activity-detail" activity.id %}';">
+                        {{activity.to_do_date|date:'H:m'}}
                     </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </table>
+                    {%if activity.is_done%}
+                        <td  onclick="window.location='{% url "activity-detail" activity.id %}';">
+                            Zrobione
+                        </td>
+                    {% else %}
+                        <td  onclick="window.location='{% url "activity-detail" activity.id %}';">
+                            Nie zrobione
+                        </td>
+                    {% endif %}
+                    <td>
+                        <input type="checkbox" name="{{ activity.id }}" value="{{ activity.id }}">    
+                    </td>   
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
     <hr>
     {% endfor %}
 {% endblock %}

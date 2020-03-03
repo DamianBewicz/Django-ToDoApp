@@ -18,7 +18,7 @@ class ActivityListView(LoginRequiredMixin, ListView):
     model = Activitie
     template_name = 'activitie.html'
     context_object_name = 'activities'
-    ordering = ['to_do_date']
+    ordering = ['-to_do_date']
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
@@ -53,6 +53,11 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+def dupa(request):
+    import pdb;pdb.set_trace()
+    print(request)
 
 
 class ActivityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
