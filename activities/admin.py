@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Activitie
+from .models import Activity
 
-admin.site.register(Activitie)
+admin.site.register(Activity)
 # Register your models here.

@@ -7,7 +7,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Activitie
+from .models import Activity
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import ActivityForm, RawActivityForm
 from django.views import View
@@ -15,8 +15,8 @@ from django.views import View
 
 class ActivityListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
-    model = Activitie
-    template_name = 'activitie.html'
+    model = Activity
+    template_name = 'activity.html'
     context_object_name = 'activities'
     ordering = ['-to_do_date']
 
@@ -41,14 +41,14 @@ class ActivityListView(LoginRequiredMixin, ListView):
 
 
 class ActivityDetailView(DetailView):
-    model = Activitie
+    model = Activity
     template_name = 'activity_detail.html'
 
 
 class ActivityCreateView(LoginRequiredMixin, CreateView):
-    model = Activitie
-    template_name = 'activitie_form.html'
-    fields = ['activitie', 'to_do_date', 'is_done']
+    model = Activity
+    template_name = 'activity_form.html'
+    fields = ['activity', 'to_do_date', 'is_done']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -61,29 +61,29 @@ def dupa(request):
 
 
 class ActivityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Activitie
+    model = Activity
     template_name = 'activity_delete.html'
     success_url = '/'
 
     def test_func(self):
-        activitie = self.get_object()
-        if self.request.user == activitie.user:
+        activity = self.get_object()
+        if self.request.user == activity.user:
             return True
         return False
 
 
 class ActivityUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Activitie
-    template_name = 'activitie_form.html'
-    fields = ['activitie', 'to_do_date', 'is_done']
+    model = Activity
+    template_name = 'activity_form.html'
+    fields = ['activity', 'to_do_date', 'is_done']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
-        activitie = self.get_object()
-        if self.request.user == activitie.user:
+        activity = self.get_object()
+        if self.request.user == activity.user:
             return True
         return False
 

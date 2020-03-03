@@ -3,7 +3,7 @@
     <form method="post" action="{% url "activity-delete-many" %}">
         {% csrf_token %}
         <div class="mb-3 ml-3">
-            <a href="{% url 'activitie-add' %}">Dodaj Aktywność</a>
+            <a href="{% url 'activity-add' %}">Dodaj Aktywność</a>
             <div class="float-right">
                 <button type="submit" style="position: right;">
                     <i class="icon-trash"></i>
@@ -22,7 +22,7 @@
             {% for activity in activities %}
                 <tr>
                     <td  onclick="window.location='{% url "activity-detail" activity.id %}';">
-                        {{activity.activitie}}
+                        {{activity.activity}}
                     </td>
                     <td  onclick="window.location='{% url "activity-detail" activity.id %}';">
                         {{activity.to_do_date|date:'H:m'}}

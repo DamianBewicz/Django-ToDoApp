@@ -1,14 +1,14 @@
 from django import forms
-from .models import Activitie
+from .models import Activity
 
 class ActivityForm(forms.ModelForm):
     class Meta:
-        model = Activitie
+        model = Activity
         fields = [
-            'activitie',
+            'activity',
             'to_do_date',
         ]
 
 class RawActivityForm(forms.Form):
-    activitie   = forms.CharField(max_length=50)
+    activity   = forms.CharField(max_length=50)
     to_do_date  = forms.DateTimeField()
