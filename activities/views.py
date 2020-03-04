@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import (
+    render,
+    redirect
+)
 from datetime import datetime
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
     DetailView,
@@ -8,8 +12,14 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Activity
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import ActivityForm, RawActivityForm
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
+from .forms import (
+    ActivityForm,
+    RawActivityForm
+)
 from django.views import View
 
 
@@ -49,15 +59,11 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
     model = Activity
     template_name = 'activity_form.html'
     fields = ['activity', 'to_do_date', 'is_done']
+    success_url = '/activities'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
-
-def dupa(request):
-    import pdb;pdb.set_trace()
-    print(request)
 
 
 class ActivityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -88,20 +94,39 @@ class ActivityUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class CreateActivityView(LoginRequiredMixin, View):
-    login_url = '/login/'
-    form = RawActivityForm()
-
-    def get(self, request):
-        context = {
-            'form': self.form
-        }
-        return render(request, 'user_activities.html', context)
+class DeleteManyActivieties(LoginRequiredMixin, UserPassesTestMixin, View):
+    model = Activity
 
     def post(self, request):
-        if form.is_valid():
-            form.save()
-        context = {
-            'form': self.form
-        }
-        return render(request, 'user_activities.html', context)
+        list_ids = request.POST.getlist('id')
+        for object_id in list_ids:
+            Activity.objects.get(id=object_id).delete()
+        return redirect('activity')
+
+    def test_func(self):
+        for pk in self.request.POST.getlist('id'):
+            if self.request.user != Activity.objects.get(id=pk).user:
+                return False
+        return True
+
+
+class ChangeStatusActivieties(LoginRequiredMixin, UserPassesTestMixin, View):
+    model = Activity
+
+    def get(self, request, pk):
+        activity = Activity.objects.get(id=pk)
+        if activity.is_done:
+            activity.is_done = False
+        else:
+            activity.is_done = True
+        activity.save()
+        return redirect('activity')
+
+
+    def test_func(self):
+        path = self.request.get_full_path()
+        print(path)
+        pk = path.split('/')[-1]
+        if self.request.user == Activity.objects.get(id=pk).user:
+            return True
+        return False
