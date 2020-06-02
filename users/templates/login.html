@@ -2,9 +2,9 @@
 
 {% block content %}
   <div class=>
-    <h2>Log in to My Site</h2>
+    <h2>Zaloguj się na moja stronę, aby zacząć dodawać aktywności!</h2>
     {% if form.errors %}
-      <p style="color: red">Your username and password didn't match. Please try again.</p>
+      <p style="color: red">Twoja nazwa użytkownika bądź hasło są nieprawidłowe, spróbuj jeszcze raz!</p>
     {% endif %}
     <form method="post">
       {% csrf_token %}
@@ -21,8 +21,8 @@
           {% endif %}
         </p>
       {% endfor %}
-      <button type="submit" class="btn btn-primary">Log in</button>
-      <a href="{% url 'signup' %}">New to my site? Sign up!</a>
+      <button type="submit" class="btn btn-primary">Zaloguj się</button>
+      <a href="{% url 'signup' %}">Pierwszy raz? Zarejestruj się!</a>
     </form>
   </div>
 {% endblock %}

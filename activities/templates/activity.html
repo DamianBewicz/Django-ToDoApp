@@ -23,9 +23,9 @@
             </tr>
             {% for activity in activities %}
                 {% if activity.is_done %}
-                <tr class="strikeout">
+                    <tr id='activity-{{ activity.id }}' class="strikeout" >
                 {% else %}
-                <tr>
+                    <tr id='activity-{{ activity.id }}'>
                 {% endif %}
                     <td  onclick="window.location='{% url "activity-detail" activity.id %}';">
                         {{activity.activity}}
@@ -44,9 +44,7 @@
                     {% endif %}
                     <td>
                         <input type="checkbox" name="id" value="{{ activity.id }}">    
-                    </td>  
-                    {% if activity.is_done %}
-                    {% endif %} 
+                    </td>
                 </tr>
             {% endfor %}
         </table>

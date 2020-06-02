@@ -67,11 +67,6 @@ tr.strikeout td:before {
   width: 100%;
 }
 
-tr.strikeout td:after {
-  content: "\00B7";
-  font-size: 1px;
-}
-
 /* Extra styling */
 td 
 {

@@ -89,9 +89,8 @@ class ActivityUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         activity = self.get_object()
-        if self.request.user == activity.user:
-            return True
-        return False
+        return self.request.user == activity.user
+
 
 
 class DeleteManyActivieties(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -115,18 +114,10 @@ class ChangeStatusActivieties(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def get(self, request, pk):
         activity = Activity.objects.get(id=pk)
-        if activity.is_done:
-            activity.is_done = False
-        else:
-            activity.is_done = True
+        activity.is_done = not activity.is_done
         activity.save()
-        return redirect('activity')
-
+        return redirect('/activities/#activity-{}'.format(pk))
 
     def test_func(self):
-        path = self.request.get_full_path()
-        print(path)
-        pk = path.split('/')[-1]
-        if self.request.user == Activity.objects.get(id=pk).user:
-            return True
-        return False
+        pk = self.kwargs.get('pk')
+        return self.request.user == Activity.objects.get(id=pk).user
