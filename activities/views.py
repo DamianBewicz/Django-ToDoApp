@@ -45,6 +45,7 @@ class ActivityListView(LoginRequiredMixin, ListView):
                     current_activities = []
                 current_date = activity.to_do_date.date()
             current_activities.append(activity)
+            pass
         grouped_activities.append((current_date, current_activities))
         context['grouped_activities'] = grouped_activities
         return context

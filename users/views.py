@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from .forms import UserRegisterForm
 
 
+
 class SignupView(View):
     def get(self, request):
         form = UserRegisterForm()
