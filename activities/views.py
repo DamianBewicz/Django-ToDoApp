@@ -38,6 +38,7 @@ class ActivityListView(LoginRequiredMixin, ListView):
         grouped_activities = []
         current_date = None
         current_activities = []
+        print(context['activities'])
         for activity in context['activities']:
             if activity.to_do_date.date() != current_date:
                 if current_date is not None:
