@@ -1,5 +1,7 @@
 from django import forms
 from .models import Activity
+from django.contrib.admin.widgets import AdminDateWidget
+
 
 class ActivityForm(forms.ModelForm):
     class Meta:
@@ -11,4 +13,4 @@ class ActivityForm(forms.ModelForm):
 
 class RawActivityForm(forms.Form):
     activity   = forms.CharField(max_length=50)
-    to_do_date  = forms.DateTimeField()
+    to_do_date  = forms.DateTimeField(widget = AdminDateWidget)

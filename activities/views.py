@@ -118,7 +118,7 @@ class ChangeStatusActivieties(LoginRequiredMixin, UserPassesTestMixin, View):
         activity = Activity.objects.get(id=pk)
         activity.is_done = not activity.is_done
         activity.save()
-        return redirect('/activities/#activity-{}'.format(pk))
+        return redirect(f'/activities/#activity-{pk}')
 
     def test_func(self):
         pk = self.kwargs.get('pk')
