@@ -28,6 +28,7 @@ td
     display: contents;
 }
 
+
 tr
 {
     text-align: center;
@@ -50,7 +51,8 @@ tr
 
 table 
 { 
-    border-collapse: collapse; empty-cells: show; 
+    border-collapse: collapse;
+    empty-cells: show; 
 }
 
 td
@@ -67,18 +69,13 @@ tr.strikeout td:before {
   width: 100%;
 }
 
-/* Extra styling */
-td 
-{
-     width: 100px; 
-}
-
 th 
 { 
-    text-align: left; 
+    text-align: center; 
 }
 
 .lorem
 {
     font-size:  1.25rem;
 }
+

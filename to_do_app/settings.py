@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    'bootstrap_datepicker_plus',
     'activities.apps.ActivitiesConfig',
     'crispy_forms',
     'django.contrib.admin',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -131,4 +133,6 @@ LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = 'home'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

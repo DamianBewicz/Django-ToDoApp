@@ -58,9 +58,8 @@ class ActivityDetailView(DetailView):
 
 
 class ActivityCreateView(LoginRequiredMixin, CreateView):
-    model = Activity
+    form_class = ActivityForm
     template_name = 'activity_form.html'
-    fields = ['activity', 'to_do_date', 'is_done']
     success_url = '/activities'
 
     def form_valid(self, form):
