@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    'rest_framework',
     'bootstrap_datepicker_plus',
     'activities.apps.ActivitiesConfig',
     'crispy_forms',
