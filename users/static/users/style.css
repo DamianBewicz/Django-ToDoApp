@@ -28,13 +28,12 @@ td
     display: contents;
 }
 
-
 tr
 {
     text-align: center;
 }
 
-.icon-trash >i
+.icon-trash > i
 {
     text-align: right;
 }

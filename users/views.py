@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
+from django.core.mail import send_mail
+from django.conf import settings
 from .forms import UserRegisterForm
 
 
@@ -19,6 +21,9 @@ class SignupView(View):
             email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(password=raw_password, email=email)
+            email_subject = f"Witaj {user.username}!"
+            email_message = "Aktywuj swoje konto!"
+            send_mail(email_subject, email_message, settings.EMAIL_HOST_USER, [user.email])
             login(request, user)
             return redirect('home')
         return render(request, 'signup.html', {'form': form})
